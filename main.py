@@ -31,16 +31,15 @@ def interpolate(x_arr, y_arr, x_result, kernel):
     # distance = range_len / (len(x_result) - 1)  # Distance between two points
 
     for x in x_result:
-        sum_temp = 0
-        weight_sum = 0
-        for x_compare, y in zip(x_arr, y_arr):
-            t = x - x_compare
-            weight = kernel(t)
-            sum_temp += y * weight
-            weight_sum += weight
+        weights = kernel(x - x_arr)
+        weights = weights.astype(float)
+        total_weight = np.sum(weights)
 
-        if weight_sum != 0:
-            y_result.append(sum_temp / weight_sum)
+        if total_weight != 0:
+            weights /= total_weight
+
+            y = np.sum(weights * y_arr)
+            y_result.append(y)
         else:
             y_result.append(0)
 
@@ -48,41 +47,31 @@ def interpolate(x_arr, y_arr, x_result, kernel):
 
 
 def rectangular_kernel(t):
-    if np.abs(t) <= 1:
-        return 1
-    return 0
+    return np.where((t >= 0) & (t < 1), 1, 0)
 
 
 def h2_kernel(t):
-    if -0.5 <= t < 0.5:
-        return 1
-    return 0
+    return np.where((t >= -0.5) & (t < 0.5), 1, 0)
 
 
 def h3_kernel(t):
-    if abs(t) <= 1:
-        return 1 - abs(t)
-    return 0
+    return np.where((t >= -1) & (t < 1), 1 - abs(t), 0)
 
 
-def sin_kernel(t):
-    if t > 0:
-        return np.sin(t) / t
-    return 0
+def sin_kernel(x):
+    return np.where(x == 0, 1, np.sin(x)/x)
 
 
-def sinc_kernel(t):
-    if t > 0:
-        return np.sin(np.pi * t) / (np.pi * t)
-    return 0
+def sinc_kernel(x):
+    return np.sinc(x/np.pi)
 
 
-def cubic_kernel(t):
-    if 0 < abs(t) < 1:
-        return (3 * pow(abs(t), 3)) / 2 - (5 * pow(abs(t), 2)) / 2 + 1
-    elif 1 < abs(t) < 2:
-        return (-pow(abs(t), 3)) / 2 + (5 * pow(abs(t), 2)) / 2 - (4 * abs(t)) + 2
-    return 0
+# def cubic_kernel(t):
+#     if 0 < abs(t) < 1:
+#         return (3 * pow(abs(t), 3)) / 2 - (5 * pow(abs(t), 2)) / 2 + 1
+#     elif 1 < abs(t) < 2:
+#         return (-pow(abs(t), 3)) / 2 + (5 * pow(abs(t), 2)) / 2 - (4 * abs(t)) + 2
+#     return 0
 
 
 def check_mse(y_original, y_interpolated):
@@ -105,8 +94,6 @@ def print_mse(func, x_samples, y_samples, x):
           str(check_mse(y_samples, interpolate(x_samples, y_samples, x, h3_kernel))))
     print(str(func) + " sinusoidal kernel MSE: " +
           str(check_mse(y_samples, interpolate(x_samples, y_samples, x, sin_kernel))))
-    print(str(func) + " cubic kernel MSE: " +
-          str(check_mse(y_samples, interpolate(x_samples, y_samples, x, cubic_kernel))) + "\n")
 
 
 def set_subplot_properties(ax, title):
@@ -159,7 +146,6 @@ if __name__ == "__main__":
     ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h2_kernel))
     ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h3_kernel))
     ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, sin_kernel))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, cubic_kernel))
 
     print_mse("Sinus", x_samples, sin_y_samples, x)
 
@@ -170,7 +156,6 @@ if __name__ == "__main__":
     ax_inv.plot(x, interpolate(x_samples, inv_y_samples, x, h2_kernel))
     ax_inv.plot(x, interpolate(x_samples, inv_y_samples, x, h3_kernel))
     ax_inv.plot(x, interpolate(x_samples, inv_y_samples, x, sin_kernel))
-    ax_inv.plot(x, interpolate(x_samples, inv_y_samples, x, cubic_kernel))
 
     print_mse("Inverse sin", x_samples, inv_y_samples, x)
 
@@ -181,7 +166,6 @@ if __name__ == "__main__":
     ax_sign.plot(x, interpolate(x_samples, sign_y_samples, x, h2_kernel))
     ax_sign.plot(x, interpolate(x_samples, sign_y_samples, x, h3_kernel))
     ax_sign.plot(x, interpolate(x_samples, sign_y_samples, x, sin_kernel))
-    ax_sign.plot(x, interpolate(x_samples, sign_y_samples, x, cubic_kernel))
 
     print_mse("Signum", x_samples, sign_y_samples, x)
 
