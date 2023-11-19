@@ -1,5 +1,6 @@
 from matplotlib import pyplot as plt
 import numpy as np
+from utilities import find_closest, find_closest_indexes
 
 
 def invert(x):
@@ -8,122 +9,6 @@ def invert(x):
 
 def signum(x):
     return np.sign(np.sin(8*x))
-
-
-def find_closest_indexes(point, arr, amount=1):
-    if len(arr) < 1:
-        print("Err: array in find_closest() function can't be empty!")
-        return 0
-
-    if amount > len(arr):
-        print("Err: Array given in find_closest() function is smaller than amount of searched points!")
-
-    left_offset = 0
-    right_offset = 0
-    left_index = 0
-    right_index = 0
-
-    result_arr = []
-
-    if point < arr[0]:
-        for i in range(amount):
-            if i <= (len(arr) - 1):
-                result_arr.append(i)
-        return result_arr
-
-    if point > arr[-1]:
-        for i in np.flip(range(amount)):
-            if len(arr) - i <= len(arr):
-                result_arr.append(len(arr) - 1 - i)
-        return result_arr
-
-    for i in range(len(arr)):
-        if arr[i] == point:
-            for j in np.flip(range(amount)):
-                if 0 <= i - j - 1 < len(arr):
-                    result_arr.append(i - j - 1)
-
-            if arr[i] == point:
-                result_arr.append(point)
-
-            for j in range(amount):
-                if i + j + 1 < len(arr):
-                    if arr[i + j + 1] == point:
-                        continue
-                    result_arr.append(i + j + 1)
-
-            return result_arr
-
-        elif arr[i] > point:
-            for j in np.flip(range(amount)):
-                if 0 <= i - j - 1 < len(arr):
-                    result_arr.append(i - j - 1)
-
-            for j in range(amount):
-                if i + j < len(arr):
-                    if arr[i + j] == point:
-                        continue
-                    result_arr.append(i + j)
-
-            return result_arr
-
-
-def find_closest(point, arr, amount=1):
-    if len(arr) < 1:
-        print("Err: array in find_closest() function can't be empty!")
-        return 0
-
-    if amount > len(arr):
-        print("Err: Array given in find_closest() function is smaller than amount of searched points!")
-
-    left_offset = 0
-    right_offset = 0
-    left_index = 0
-    right_index = 0
-
-    result_arr = []
-
-    if point < arr[0]:
-        for i in range(amount):
-            if i <= (len(arr) - 1):
-                result_arr.append(arr[i])
-        return result_arr
-
-    if point > arr[-1]:
-        for i in np.flip(range(amount)):
-            if len(arr) - i <= len(arr):
-                result_arr.append(arr[len(arr) - 1 - i])
-        return result_arr
-
-    for i in range(len(arr)):
-        if arr[i] == point:
-            for j in np.flip(range(amount)):
-                if 0 <= i - j - 1 < len(arr):
-                    result_arr.append(arr[i - j - 1])
-
-            if arr[i] == point:
-                result_arr.append(point)
-
-            for j in range(amount):
-                if i + j + 1 < len(arr):
-                    if arr[i + j + 1] == point:
-                        continue
-                    result_arr.append(arr[i + j + 1])
-
-            return result_arr
-
-        elif arr[i] > point:
-            for j in np.flip(range(amount)):
-                if 0 <= i - j - 1 < len(arr):
-                    result_arr.append(arr[i - j - 1])
-
-            for j in range(amount):
-                if i + j < len(arr):
-                    if arr[i + j] == point:
-                        continue
-                    result_arr.append(arr[i + j])
-
-            return result_arr
 
 
 def interpolate(x_arr: np.ndarray, y_arr: np.ndarray, x_result: np.ndarray, kernel, interp_range=0):
@@ -147,9 +32,6 @@ def interpolate(x_arr: np.ndarray, y_arr: np.ndarray, x_result: np.ndarray, kern
     # range_len = np.abs(x_arr[0] - x_arr[-1])  # Length of measured range
     # distance = range_len / (len(x_result) - 1)  # Distance between two points
 
-    temp_x_arr = []
-    temp_y_arr = []
-
     for i in range(len(x_result)):
         if interp_range > 0:
             temp_x_arr = find_closest(x_result[i], x_arr, interp_range)
@@ -167,10 +49,6 @@ def interpolate(x_arr: np.ndarray, y_arr: np.ndarray, x_result: np.ndarray, kern
         if total_weight != 0:
             weights /= total_weight
 
-            # if len(weights) < 6:
-            #     print("Weights: " + str(weights))
-            #     print("Temp_y_arr: " + str(temp_y_arr))
-            #     print("Temp_x_arr: " + str(temp_x_arr))
             y = np.sum(weights * temp_y_arr)
             y_result.append(y)
         else:
@@ -273,12 +151,12 @@ if __name__ == "__main__":
     ax_base.plot(x, sign_y)
 
     """SINUS FUNCTION PLOTTING"""
-    ax_sin.scatter(x_samples, sin_y_samples)
+    ax_sin.plot(x_samples, sin_y_samples)
     # ax_sin.bar(x_samples, sin_y_samples, width=bar_width, align='center')
-    ax_sin.scatter(x, interpolate(x_samples, sin_y_samples, x, rectangular_kernel, 5))
-    ax_sin.scatter(x, interpolate(x_samples, sin_y_samples, x, h2_kernel, 5))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h3_kernel, 5))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, sin_kernel, 5))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, rectangular_kernel))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h2_kernel))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h3_kernel))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, sin_kernel))
 
     print_mse("Sinus", x_samples, sin_y_samples, x)
 
