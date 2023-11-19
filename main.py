@@ -10,7 +10,123 @@ def signum(x):
     return np.sign(np.sin(8*x))
 
 
-def interpolate(x_arr, y_arr, x_result, kernel):
+def find_closest_indexes(point, arr, amount=1):
+    if len(arr) < 1:
+        print("Err: array in find_closest() function can't be empty!")
+        return 0
+
+    if amount > len(arr):
+        print("Err: Array given in find_closest() function is smaller than amount of searched points!")
+
+    left_offset = 0
+    right_offset = 0
+    left_index = 0
+    right_index = 0
+
+    result_arr = []
+
+    if point < arr[0]:
+        for i in range(amount):
+            if i <= (len(arr) - 1):
+                result_arr.append(i)
+        return result_arr
+
+    if point > arr[-1]:
+        for i in np.flip(range(amount)):
+            if len(arr) - i <= len(arr):
+                result_arr.append(len(arr) - 1 - i)
+        return result_arr
+
+    for i in range(len(arr)):
+        if arr[i] == point:
+            for j in np.flip(range(amount)):
+                if 0 <= i - j - 1 < len(arr):
+                    result_arr.append(i - j - 1)
+
+            if arr[i] == point:
+                result_arr.append(point)
+
+            for j in range(amount):
+                if i + j + 1 < len(arr):
+                    if arr[i + j + 1] == point:
+                        continue
+                    result_arr.append(i + j + 1)
+
+            return result_arr
+
+        elif arr[i] > point:
+            for j in np.flip(range(amount)):
+                if 0 <= i - j - 1 < len(arr):
+                    result_arr.append(i - j - 1)
+
+            for j in range(amount):
+                if i + j < len(arr):
+                    if arr[i + j] == point:
+                        continue
+                    result_arr.append(i + j)
+
+            return result_arr
+
+
+def find_closest(point, arr, amount=1):
+    if len(arr) < 1:
+        print("Err: array in find_closest() function can't be empty!")
+        return 0
+
+    if amount > len(arr):
+        print("Err: Array given in find_closest() function is smaller than amount of searched points!")
+
+    left_offset = 0
+    right_offset = 0
+    left_index = 0
+    right_index = 0
+
+    result_arr = []
+
+    if point < arr[0]:
+        for i in range(amount):
+            if i <= (len(arr) - 1):
+                result_arr.append(arr[i])
+        return result_arr
+
+    if point > arr[-1]:
+        for i in np.flip(range(amount)):
+            if len(arr) - i <= len(arr):
+                result_arr.append(arr[len(arr) - 1 - i])
+        return result_arr
+
+    for i in range(len(arr)):
+        if arr[i] == point:
+            for j in np.flip(range(amount)):
+                if 0 <= i - j - 1 < len(arr):
+                    result_arr.append(arr[i - j - 1])
+
+            if arr[i] == point:
+                result_arr.append(point)
+
+            for j in range(amount):
+                if i + j + 1 < len(arr):
+                    if arr[i + j + 1] == point:
+                        continue
+                    result_arr.append(arr[i + j + 1])
+
+            return result_arr
+
+        elif arr[i] > point:
+            for j in np.flip(range(amount)):
+                if 0 <= i - j - 1 < len(arr):
+                    result_arr.append(arr[i - j - 1])
+
+            for j in range(amount):
+                if i + j < len(arr):
+                    if arr[i + j] == point:
+                        continue
+                    result_arr.append(arr[i + j])
+
+            return result_arr
+
+
+def interpolate(x_arr: np.ndarray, y_arr: np.ndarray, x_result: np.ndarray, kernel, interp_range=0):
     """
     Interpolate data using the specified kernel
 
@@ -19,6 +135,7 @@ def interpolate(x_arr, y_arr, x_result, kernel):
         :param y_arr: The y-values of the original data (function).
         :param x_result: The x-values for interpolation.
         :param kernel: The interpolation kernel function
+        :param interp_range: The range of points near the interpolated point on which we perform interpolation  # UPDATE
 
     :return: numpy.ndarray: The interpolated y-values
     """
@@ -30,15 +147,31 @@ def interpolate(x_arr, y_arr, x_result, kernel):
     # range_len = np.abs(x_arr[0] - x_arr[-1])  # Length of measured range
     # distance = range_len / (len(x_result) - 1)  # Distance between two points
 
-    for x in x_result:
-        weights = kernel(x - x_arr)
+    temp_x_arr = []
+    temp_y_arr = []
+
+    for i in range(len(x_result)):
+        if interp_range > 0:
+            temp_x_arr = find_closest(x_result[i], x_arr, interp_range)
+            temp_y_arr = []
+            for index in find_closest_indexes(x_result[i], x_arr, interp_range):
+                temp_y_arr.append(y_arr[int(index)])
+        else:
+            temp_x_arr = x_arr
+            temp_y_arr = y_arr
+
+        weights = kernel(x_result[i] - temp_x_arr)
         weights = weights.astype(float)
         total_weight = np.sum(weights)
 
         if total_weight != 0:
             weights /= total_weight
 
-            y = np.sum(weights * y_arr)
+            # if len(weights) < 6:
+            #     print("Weights: " + str(weights))
+            #     print("Temp_y_arr: " + str(temp_y_arr))
+            #     print("Temp_x_arr: " + str(temp_x_arr))
+            y = np.sum(weights * temp_y_arr)
             y_result.append(y)
         else:
             y_result.append(0)
@@ -106,8 +239,8 @@ def set_subplot_properties(ax, title):
 if __name__ == "__main__":
     """######################### SAMPLES PART ############################"""
 
-    no_samples = 1000
-    func_density = 200
+    no_samples = 100
+    func_density = 10000
 
     x = np.linspace(-np.pi, np.pi, func_density)
     sin_y = np.sin(x)
@@ -140,12 +273,12 @@ if __name__ == "__main__":
     ax_base.plot(x, sign_y)
 
     """SINUS FUNCTION PLOTTING"""
-    ax_sin.plot(x, sin_y)
+    ax_sin.scatter(x_samples, sin_y_samples)
     # ax_sin.bar(x_samples, sin_y_samples, width=bar_width, align='center')
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, rectangular_kernel))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h2_kernel))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h3_kernel))
-    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, sin_kernel))
+    ax_sin.scatter(x, interpolate(x_samples, sin_y_samples, x, rectangular_kernel, 5))
+    ax_sin.scatter(x, interpolate(x_samples, sin_y_samples, x, h2_kernel, 5))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, h3_kernel, 5))
+    ax_sin.plot(x, interpolate(x_samples, sin_y_samples, x, sin_kernel, 5))
 
     print_mse("Sinus", x_samples, sin_y_samples, x)
 
