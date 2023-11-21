@@ -1,5 +1,12 @@
-from matplotlib import pyplot as plt
 import numpy as np
+
+
+def invert(x):
+    return np.sin(np.power(x, -1))
+
+
+def signum(x):
+    return np.sign(np.sin(8*x))
 
 
 def find_closest_indexes(point, arr, amount=1):

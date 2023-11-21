@@ -1,0 +1,262 @@
+MSE Measurements for different number of points (original: 100)
+
+
+200 interpolated points:
+
+200: Sinus rectangular kernel MSE: 0.10698864770854576
+200: Sinus h2 kernel MSE: 0.004023114091200925
+200: Sinus h3 kernel MSE: 0.009028796335574116
+200: Sinus sinusoidal kernel MSE: 0.1994530837540191
+200: Sinus cubic kernel MSE: 0.0045485203056109605
+
+200: Inverse sin rectangular kernel MSE: 0.16246433897604715
+200: Inverse sin h2 kernel MSE: 0.08578135068771965
+200: Inverse sin h3 kernel MSE: 0.07714579910536419
+200: Inverse sin sinusoidal kernel MSE: 0.20937795501637965
+200: Inverse sin cubic kernel MSE: 0.07567112914397148
+
+200: Signum rectangular kernel MSE: 0.9215149156952065
+200: Signum h2 kernel MSE: 1.2348734551277862
+200: Signum h3 kernel MSE: 0.895123594164547
+200: Signum sinusoidal kernel MSE: 0.9837334398994589
+200: Signum cubic kernel MSE: 0.9516684245836444
+
+
+400 interpolated points:
+
+400: Sinus rectangular kernel MSE: 0.10816459639002933
+400: Sinus h2 kernel MSE: 0.004113210095821895
+400: Sinus h3 kernel MSE: 0.009318637704919724
+400: Sinus sinusoidal kernel MSE: 0.19932862013037111
+400: Sinus cubic kernel MSE: 0.004783912223937954
+
+400: Inverse sin rectangular kernel MSE: 0.16292462151341428
+400: Inverse sin h2 kernel MSE: 0.08577512183936223
+400: Inverse sin h3 kernel MSE: 0.07737875173434111
+400: Inverse sin sinusoidal kernel MSE: 0.2092982164009324
+400: Inverse sin cubic kernel MSE: 0.07583469475691108
+
+400: Signum rectangular kernel MSE: 0.9246364434729841
+400: Signum h2 kernel MSE: 1.239208871794453
+400: Signum h3 kernel MSE: 0.8962133267767943
+400: Signum sinusoidal kernel MSE: 0.9837925522382251
+400: Signum cubic kernel MSE: 0.9520248845801741
+
+
+1000 interpolated points:
+
+1000: Sinus rectangular kernel MSE: 0.10817873700740428
+1000: Sinus h2 kernel MSE: 0.004168008377816437
+1000: Sinus h3 kernel MSE: 0.00951049561737367
+1000: Sinus sinusoidal kernel MSE: 0.1992612217147335
+1000: Sinus cubic kernel MSE: 0.004952193735264816
+
+1000: Inverse sin rectangular kernel MSE: 0.16306044489942617
+1000: Inverse sin h2 kernel MSE: 0.08577411074645747
+1000: Inverse sin h3 kernel MSE: 0.07753376079454673
+1000: Inverse sin sinusoidal kernel MSE: 0.20925489159838884
+1000: Inverse sin cubic kernel MSE: 0.0759526259195516
+
+1000: Signum rectangular kernel MSE: 0.9268461656952063
+1000: Signum h2 kernel MSE: 1.2399151217944528
+1000: Signum h3 kernel MSE: 0.8968772324896122
+1000: Signum sinusoidal kernel MSE: 0.9838277314151245
+1000: Signum cubic kernel MSE: 0.9522311993390576
+
+
+COMPARISON BETWEEN DIFFERENT INTERPOLATION DENSITY VALUES (100 samples)
+
+200: Sinus rectangular kernel MSE: 0.10698864770854576
+400: Sinus rectangular kernel MSE: 0.10816459639002933
+1000: Sinus rectangular kernel MSE: 0.10817873700740428
+
+200: Sinus h2 kernel MSE: 0.004023114091200925
+400: Sinus h2 kernel MSE: 0.004113210095821895
+1000: Sinus h2 kernel MSE: 0.004168008377816437
+
+200: Sinus h3 kernel MSE: 0.009028796335574116
+400: Sinus h3 kernel MSE: 0.009318637704919724
+1000: Sinus h3 kernel MSE: 0.00951049561737367
+
+200: Sinus sinusoidal kernel MSE: 0.1994530837540191
+400: Sinus sinusoidal kernel MSE: 0.19932862013037111
+1000: Sinus sinusoidal kernel MSE: 0.1992612217147335
+
+200: Sinus cubic kernel MSE: 0.0045485203056109605
+400: Sinus cubic kernel MSE: 0.004783912223937954
+1000: Sinus cubic kernel MSE: 0.004952193735264816
+
+
+200: Inverse sin rectangular kernel MSE: 0.16246433897604715
+400: Inverse sin rectangular kernel MSE: 0.16292462151341428
+1000: Inverse sin rectangular kernel MSE: 0.16306044489942617
+
+200: Inverse sin h2 kernel MSE: 0.08578135068771965
+400: Inverse sin h2 kernel MSE: 0.08577512183936223
+1000: Inverse sin h2 kernel MSE: 0.08577411074645747
+
+200: Inverse sin h3 kernel MSE: 0.07714579910536419
+400: Inverse sin h3 kernel MSE: 0.07737875173434111
+1000: Inverse sin h3 kernel MSE: 0.07753376079454673
+
+200: Inverse sin sinusoidal kernel MSE: 0.20937795501637965
+400: Inverse sin sinusoidal kernel MSE: 0.2092982164009324
+1000: Inverse sin sinusoidal kernel MSE: 0.20925489159838884
+
+200: Inverse sin cubic kernel MSE: 0.07567112914397148
+400: Inverse sin cubic kernel MSE: 0.07583469475691108
+1000: Inverse sin cubic kernel MSE: 0.0759526259195516
+
+
+200: Signum rectangular kernel MSE: 0.9215149156952065
+400: Signum rectangular kernel MSE: 0.9246364434729841
+1000: Signum rectangular kernel MSE: 0.9268461656952063
+
+200: Signum h2 kernel MSE: 1.2348734551277862
+400: Signum h2 kernel MSE: 1.239208871794453
+1000: Signum h2 kernel MSE: 1.2399151217944528
+
+200: Signum h3 kernel MSE: 0.895123594164547
+400: Signum h3 kernel MSE: 0.8962133267767943
+1000: Signum h3 kernel MSE: 0.8968772324896122
+
+200: Signum sinusoidal kernel MSE: 0.9837334398994589
+400: Signum sinusoidal kernel MSE: 0.9837925522382251
+1000: Signum sinusoidal kernel MSE: 0.9838277314151245
+
+200: Signum cubic kernel MSE: 0.9516684245836444
+400: Signum cubic kernel MSE: 0.9520248845801741
+1000: Signum cubic kernel MSE: 0.9522311993390576
+
+
+MSE Measurements for different number of points (original: 20)
+
+40 interpolated points:
+
+40: Sinus rectangular kernel MSE: 0.16998695711454842
+40: Sinus h2 kernel MSE: 0.0032555175730075423
+40: Sinus h3 kernel MSE: 0.013121196172335533
+40: Sinus sinusoidal kernel MSE: 0.21775389270767515
+40: Sinus cubic kernel MSE: 0.012633042592230173
+
+40: Inverse sin rectangular kernel MSE: 0.18068918012454635
+40: Inverse sin h2 kernel MSE: 0.04258145219367673
+40: Inverse sin h3 kernel MSE: 0.0386178843701034
+40: Inverse sin sinusoidal kernel MSE: 0.1808091090110995
+40: Inverse sin cubic kernel MSE: 0.03546780441996208
+
+40: Signum rectangular kernel MSE: 1.3111111111111111
+40: Signum h2 kernel MSE: 1.2
+40: Signum h3 kernel MSE: 0.7872421988132661
+40: Signum sinusoidal kernel MSE: 0.9634003418108454
+40: Signum cubic kernel MSE: 0.8496635901935514
+
+
+80 interpolated points:
+
+80: Sinus rectangular kernel MSE: 0.16998695711454842
+80: Sinus h2 kernel MSE: 0.014040353310254003
+80: Sinus h3 kernel MSE: 0.017576794981381476
+80: Sinus sinusoidal kernel MSE: 0.21824227423695491
+80: Sinus cubic kernel MSE: 0.017111151141805524
+
+80: Inverse sin rectangular kernel MSE: 0.18068918040: 12454635
+80: Inverse sin h2 kernel MSE: 0.04513059215264223
+80: Inverse sin h3 kernel MSE: 0.0426062639904248
+80: Inverse sin sinusoidal kernel MSE: 0.180998454893943
+80: Inverse sin cubic kernel MSE: 0.038917024294174166
+
+80: Signum rectangular kernel MSE: 1.3111111111111111
+80: Signum h2 kernel MSE: 1.0499999999999996
+80: Signum h3 kernel MSE: 0.8144211502547499
+80: Signum sinusoidal kernel MSE: 0.9642462015416783
+80: Signum cubic kernel MSE: 0.8559702483536675
+
+
+200 interpolated points:
+
+200: Sinus rectangular kernel MSE: 0.16998695711454842
+200: Sinus h2 kernel MSE: 0.020549406269692795
+200: Sinus h3 kernel MSE: 0.020674738753336842
+200: Sinus sinusoidal kernel MSE: 0.21865234915043946
+200: Sinus cubic kernel MSE: 0.02050170666577848
+
+200: Inverse sin rectangular kernel MSE: 0.18068918012454635
+200: Inverse sin h2 kernel MSE: 0.05642736799114774
+200: Inverse sin h3 kernel MSE: 0.045346676727789616
+200: Inverse sin sinusoidal kernel MSE: 0.1812016845723162
+200: Inverse sin cubic kernel MSE: 0.041538675904178465
+
+200: Signum rectangular kernel MSE: 1.3111111111111111
+200: Signum h2 kernel MSE: 0.9833333333333331
+200: Signum h3 kernel MSE: 0.830810600841596
+200: Signum sinusoidal kernel MSE: 0.9647297352752711
+200: Signum cubic kernel MSE: 0.8600241912836724
+
+
+COMPARISON BETWEEN DIFFERENT INTERPOLATION DENSITY VALUES
+
+40: Sinus rectangular kernel MSE: 0.16998695711454842
+80: Sinus rectangular kernel MSE: 0.16998695711454842
+200: Sinus rectangular kernel MSE: 0.16998695711454842
+
+40: Sinus h2 kernel MSE: 0.0032555175730075423
+80: Sinus h2 kernel MSE: 0.014040353310254003
+200: Sinus h2 kernel MSE: 0.020549406269692795
+
+40: Sinus h3 kernel MSE: 0.013121196172335533
+80: Sinus h3 kernel MSE: 0.017576794981381476
+200: Sinus h3 kernel MSE: 0.020674738753336842
+
+40: Sinus sinusoidal kernel MSE: 0.21775389270767515
+80: Sinus sinusoidal kernel MSE: 0.21824227423695491
+200: Sinus sinusoidal kernel MSE: 0.21865234915043946
+
+40: Sinus cubic kernel MSE: 0.012633042592230173
+80: Sinus cubic kernel MSE: 0.017111151141805524
+200: Sinus cubic kernel MSE: 0.02050170666577848
+
+
+40: Inverse sin rectangular kernel MSE: 0.18068918012454635
+80: Inverse sin rectangular kernel MSE: 0.18068918012454635
+200: Inverse sin rectangular kernel MSE: 0.18068918012454635
+
+40: Inverse sin h2 kernel MSE: 0.04258145219367673
+80: Inverse sin h2 kernel MSE: 0.04513059215264223
+200: Inverse sin h2 kernel MSE: 0.05642736799114774
+
+40: Inverse sin h3 kernel MSE: 0.0386178843701034
+80: Inverse sin h3 kernel MSE: 0.0426062639904248
+200: Inverse sin h3 kernel MSE: 0.045346676727789616
+
+40: Inverse sin sinusoidal kernel MSE: 0.1808091090110995
+80: Inverse sin sinusoidal kernel MSE: 0.180998454893943
+200: Inverse sin sinusoidal kernel MSE: 0.1812016845723162
+
+40: Inverse sin cubic kernel MSE: 0.03546780441996208
+80: Inverse sin cubic kernel MSE: 0.038917024294174166
+200: Inverse sin cubic kernel MSE: 0.041538675904178465
+
+
+40: Signum rectangular kernel MSE: 1.3111111111111111
+80: Signum rectangular kernel MSE: 1.3111111111111111
+200: Signum rectangular kernel MSE: 1.3111111111111111
+
+40: Signum h2 kernel MSE: 1.2
+80: Signum h2 kernel MSE: 1.0499999999999996
+200: Signum h2 kernel MSE: 0.9833333333333331
+
+40: Signum h3 kernel MSE: 0.7872421988132661
+80: Signum h3 kernel MSE: 0.8144211502547499
+200: Signum h3 kernel MSE: 0.830810600841596
+
+40: Signum sinusoidal kernel MSE: 0.9634003418108454
+80: Signum sinusoidal kernel MSE: 0.9642462015416783
+200: Signum sinusoidal kernel MSE: 0.9647297352752711
+
+40: Signum cubic kernel MSE: 0.8496635901935514
+80: Signum cubic kernel MSE: 0.8559702483536675
+200: Signum cubic kernel MSE: 0.8600241912836724
+
+
+MSE Measurements for different number of points with range (original: 100; range 5)
